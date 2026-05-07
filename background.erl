@@ -1,5 +1,7 @@
+#!/usr/bin/env escript
+%%! -smp enable -noshell
 -module(background).
--export([start/0]).
+-export([main/1]).
 
 is_png(File) ->
     [_ | Tail ] = string:tokens(File, "."),
@@ -19,5 +21,5 @@ remove_bg(File) ->
         false -> ok
     end.
 
-start() ->
+main(_Args) ->
     lists:foreach(fun remove_bg/1, string:tokens(os:cmd("ls"), "\n")).
